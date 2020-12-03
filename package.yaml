@@ -1,0 +1,66 @@
+name:                advent2020
+version:             0.1.0.0
+github:              "farrellm/advent2020"
+license:             BSD3
+author:              "Matthew Farrell"
+maintainer:          "farrellm@alum.mit.edu"
+copyright:           "2019 Matthew Farrell"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/farrellm/advent2020#readme>
+
+default-extensions:
+- DataKinds
+- FlexibleContexts
+- FlexibleInstances
+- GADTs
+- TypeApplications
+- TypeOperators
+- TypeFamilies
+
+dependencies:
+- base-noprelude
+- bifunctors
+- containers
+- lens
+- megaparsec
+- mtl
+- parser-combinators
+- relude
+- text
+- vector
+
+library:
+  source-dirs: src
+
+executables:
+  advent2020:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - advent2020
+
+tests:
+  advent2020-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - advent2020
