@@ -1,4 +1,4 @@
-module Day1 where
+module Advent2020.Day1 where
 
 part1 :: IO ()
 part1 = do

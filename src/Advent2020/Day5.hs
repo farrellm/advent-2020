@@ -1,4 +1,4 @@
-module Day5 where
+module Advent2020.Day5 where
 
 import Data.Set ((\\))
 import qualified Data.Set as S

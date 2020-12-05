@@ -1,4 +1,4 @@
-module Day2 where
+module Advent2020.Day2 where
 
 import Text.Megaparsec
 import Text.Megaparsec.Char

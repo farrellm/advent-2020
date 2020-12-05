@@ -1,4 +1,4 @@
-module Day3 where
+module Advent2020.Day3 where
 
 import qualified Data.String as S
 

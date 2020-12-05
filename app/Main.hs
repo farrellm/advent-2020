@@ -1,6 +1,6 @@
 module Main where
 
-import Day1
+import Advent2020.Day1
 
 main :: IO ()
 main = part2

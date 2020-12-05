@@ -1,5 +1,5 @@
 .stack-work/
-data/
+data*/
 stack.yaml.lock
 *.cabal
 *~

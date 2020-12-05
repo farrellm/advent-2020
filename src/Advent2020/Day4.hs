@@ -1,4 +1,4 @@
-module Day4 where
+module Advent2020.Day4 where
 
 import qualified Data.Set as S
 import qualified Data.Text as T
