@@ -6,7 +6,9 @@ module Prelude
   )
 where
 
-import Relude as X hiding (some)
+import Data.Map as X ((!))
+import Relude as X hiding (many, some)
+import Relude.Extra.Foldable1 as X
 import Relude.Unsafe as X (read, (!!))
 import Text.Megaparsec (Parsec, errorBundlePretty)
 import qualified Text.Megaparsec as Mp
