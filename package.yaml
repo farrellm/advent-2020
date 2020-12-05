@@ -20,11 +20,17 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/farrellm/advent2020#readme>
 
 default-extensions:
+- ConstraintKinds
 - DataKinds
 - FlexibleContexts
 - FlexibleInstances
 - GADTs
-- TypeApplications
+- OverloadedStrings
+- PolyKinds
+- RankNTypes
+- RecordWildCards
+- ScopedTypeVariables
+- TupleSections
 - TypeOperators
 - TypeFamilies
 

@@ -1,6 +1,7 @@
 module Prelude
   ( module X,
     Parser,
+    readText,
   )
 where
 
@@ -10,3 +11,6 @@ import Text.Megaparsec (Parsec)
 import Text.Megaparsec.Char.Lexer as X (binary, decimal, hexadecimal, octal, signed)
 
 type Parser = Parsec Void Text
+
+readText :: (Read a) => Text -> a
+readText = read . toString
