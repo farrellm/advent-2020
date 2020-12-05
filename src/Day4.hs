@@ -40,24 +40,22 @@ isValid = (== 7) . length . filter ((/= CountryID) . fst)
 
 part1 :: IO ()
 part1 = do
-  mes <- parse (passport `sepEndBy` eol) "" <$> readFileText "data/day4.txt"
-  case mes of
-    Left err -> putStrLn $ errorBundlePretty err
-    Right es -> print . length $ filter isValid es
+  es <- unsafeParse (passport `sepEndBy` eol) "data/day4.txt"
+  print . length $ filter isValid es
 
 isValidEntry :: (Field, Text) -> Bool
 isValidEntry (BirthYear, t) =
-  let y = readText t :: Int
+  let y = readInt t
    in 1920 <= y && y <= 2002
 isValidEntry (IssueYear, t) =
-  let y = readText t :: Int
+  let y = readInt t
    in 2010 <= y && y <= 2020
 isValidEntry (ExpirationYear, t) =
-  let y = readText t :: Int
+  let y = readInt t
    in 2020 <= y && y <= 2030
 isValidEntry (Height, t) =
   let (a, b) = T.splitAt (T.length t - 2) t
-      i = readText a :: Int
+      i = readInt a
    in case b of
         "cm" -> 150 <= i && i <= 193
         "in" -> 59 <= i && i <= 76
