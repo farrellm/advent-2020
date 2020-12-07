@@ -1,14 +1,32 @@
+{-# LANGUAGE TypeApplications #-}
+
 module Prelude
   ( module X,
     Parser,
     unsafeParse,
     readInt,
+    md5,
   )
 where
 
+import Control.Lens as X
+  ( at,
+    ix,
+    non,
+    (?~),
+    (^..),
+    (^?),
+    _1,
+    _2,
+    _3,
+    _Just,
+    _Nothing,
+  )
+import Crypto.Hash (MD5, hash)
 import Data.Map as X ((!))
+import Data.Set as X (intersection, union)
 import Relude as X hiding (many, some)
-import Relude.Extra.Foldable1 as X
+import Relude.Extra as X
 import Relude.Unsafe as X (read, (!!))
 import Text.Megaparsec (Parsec, errorBundlePretty)
 import qualified Text.Megaparsec as Mp
@@ -27,3 +45,6 @@ unsafeParse p f = do
       putStrLn $ errorBundlePretty err
       exitFailure
     Right es -> pure es
+
+md5 :: Text -> Text
+md5 = show . hash @ByteString @MD5 . encodeUtf8
