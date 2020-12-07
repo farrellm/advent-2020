@@ -38,6 +38,10 @@ dependencies:
 - base-noprelude
 - bifunctors
 - containers
+- cryptonite
+- ecstasy
+- free-algebras
+- gloss
 - lens
 - megaparsec
 - mtl
@@ -57,6 +61,8 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -fno-warn-deprecations
+    - -fno-warn-unused-do-bind
     dependencies:
     - advent2020
 
