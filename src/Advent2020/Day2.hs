@@ -4,10 +4,10 @@ import Text.Megaparsec
 import Text.Megaparsec.Char
 
 data Entry = Entry
-  { eMin :: Int,
-    eMax :: Int,
-    eChar :: Char,
-    ePass :: String
+  { eMin :: Int
+  , eMax :: Int
+  , eChar :: Char
+  , ePass :: String
   }
   deriving (Show)
 
@@ -36,7 +36,7 @@ part1 = do
 
 isValid' :: Entry -> Bool
 isValid' Entry {..} =
-  let p = \i -> ePass !! (i - 1) == eChar
+  let p i = ePass !! (i - 1) == eChar
    in p eMin /= p eMax
 
 part2 :: IO ()

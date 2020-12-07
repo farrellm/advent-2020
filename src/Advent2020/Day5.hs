@@ -2,14 +2,13 @@ module Advent2020.Day5 where
 
 import Data.Set ((\\))
 import qualified Data.Set as S
-import Relude.Extra (Foldable1 (maximum1))
 
 decode :: String -> Int
 decode = foldl' f 0
-  where
-    f a c
-      | c == 'B' || c == 'R' = 2 * a + 1
-      | otherwise = 2 * a
+ where
+  f a c
+    | c == 'B' || c == 'R' = 2 * a + 1
+    | otherwise = 2 * a
 
 calcId :: (Int, Int) -> Int
 calcId = uncurry (+) . first (* 8)

@@ -1,6 +1,5 @@
 module Advent2015.Day13 where
 
-import Control.Lens
 import Text.Megaparsec
 import Text.Megaparsec.Char
 
