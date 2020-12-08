@@ -9,24 +9,16 @@ module Prelude
   )
 where
 
-import Control.Lens as X
-  ( at,
-    ix,
-    non,
-    (?~),
-    (^..),
-    (^?),
-    _1,
-    _2,
-    _3,
-    _Just,
-    _Nothing,
-  )
+import Control.Lens as X hiding (head1, last1, uncons, universe, (??))
 import Crypto.Hash (MD5, hash)
 import Data.Map as X ((!))
 import Data.Set as X (intersection, union)
 import Relude as X hiding (many, some)
-import Relude.Extra as X
+import Relude.Extra.Enum as X
+import Relude.Extra.Foldable1 as X
+import Relude.Extra.Group as X
+import Relude.Extra.Map as X
+import Relude.Extra.Tuple as X
 import Relude.Unsafe as X (read, (!!))
 import Text.Megaparsec (Parsec, errorBundlePretty)
 import qualified Text.Megaparsec as Mp
