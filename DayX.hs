@@ -25,8 +25,8 @@ part2 f = do
 
 test :: IO ()
 test = do
-  part1 "data/testX.txt"
-  -- part1 "data/dayX.txt"
-  -- part2 "data/testX.txt"
-  -- part2 "data/dayX.txt"
+  part1 "data20XX/testX.txt"
+  -- part1 "data20XX/dayX.txt"
+  -- part2 "data20XX/testX.txt"
+  -- part2 "data20XX/dayX.txt"
   pass
