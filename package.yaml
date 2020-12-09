@@ -41,6 +41,7 @@ dependencies:
 - cryptonite
 - ecstasy
 - free-algebras
+- gauge
 - gloss
 - lens
 - megaparsec

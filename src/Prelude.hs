@@ -20,6 +20,7 @@ import Crypto.Hash (MD5, hash)
 import Data.List (maximum, minimum)
 import Data.Map as X ((!))
 import Data.Set as X (intersection, union)
+import Data.Vector as X (Vector)
 import Relude as X hiding (many, some)
 import Relude.Extra.Enum as X
 import Relude.Extra.Foldable1 as X
