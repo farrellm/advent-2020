@@ -3,8 +3,10 @@
 module Prelude
   ( module X,
     Parser,
-    Dir4,
-    Dir8,
+    Dir4 (..),
+    Dir8 (..),
+    rotLeft,
+    rotRight,
     unsafeParse,
     readInt,
     md5,
@@ -46,6 +48,18 @@ data Dir4 = N | E | S | W
 
 data Dir8 = NN | NE | EE | SE | SS | SW | WW | NW
   deriving (Show, Eq, Ord, Enum, Bounded)
+
+rotLeft :: Dir4 -> Dir4
+rotLeft N = W
+rotLeft W = S
+rotLeft S = E
+rotLeft E = N
+
+rotRight :: Dir4 -> Dir4
+rotRight N = E
+rotRight E = S
+rotRight S = W
+rotRight W = N
 
 readInt :: (ToString s) => s -> Int
 readInt = read . toString
