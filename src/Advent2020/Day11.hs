@@ -11,13 +11,13 @@ data CA a = CA (Vector (Vector a)) (Int, Int)
   deriving (Functor, Eq)
 
 instance Comonad CA where
-  extract (CA g (r, c)) = g V.! r V.! c
-  extend f (CA g (r, c)) =
+  extract (CA g p) = g #!! p
+  extend f (CA g p) =
     let g' =
-          flip imap g $ \r' w ->
-            flip imap w $ \c' _ ->
-              f $ CA g (r', c')
-     in CA g' (r, c)
+          flip imap g $ \r w ->
+            flip imap w $ \c _ ->
+              f $ CA g (r, c)
+     in CA g' p
 
 cell :: Parser Cell
 cell =
@@ -35,16 +35,14 @@ draw (CA g _) =
     putStrLn ""
 
 step :: CA Cell -> Cell
-step (CA g p@(r, c)) =
-  let ss = mapMaybe (getCell . mv8 p) universe
+step (CA g p) =
+  let ss = mapMaybe (join . (g #!!?) . mv8 p) universe
       n = length $ filter id ss
-   in g V.! r V.! c
+   in g #!! p
         <&> if
             | n == 0 -> const True
             | n >= 4 -> const False
             | otherwise -> id
- where
-  getCell (r', c') = join $ g V.!? r' >>= (V.!? c')
 
 go :: (CA Cell -> Cell) -> CA Cell -> CA Cell
 go s g =
@@ -63,10 +61,10 @@ part1 f = do
   print n
 
 step' :: CA Cell -> Cell
-step' (CA g p@(r, c)) =
+step' (CA g p) =
   let ss = mapMaybe (\d -> firstSeat (mv8 p d) d) universe
       n = length $ filter id ss
-   in g V.! r V.! c
+   in g #!! p
         <&> if
             | n == 0 -> const True
             | n >= 5 -> const False
@@ -76,7 +74,7 @@ step' (CA g p@(r, c)) =
   firstSeat q@(r', c') d
     | r' < 0 || c' < 0 || r' >= V.length g || c' >= V.length (g V.! r') = Nothing
     | otherwise =
-      case g V.! r' V.! c' of
+      case g #!! q of
         Nothing -> firstSeat (mv8 q d) d
         Just b -> Just b
 
@@ -91,8 +89,8 @@ part2 f = do
 
 test :: IO ()
 test = do
-  -- part1 "data2020/test11.txt"
-  part1 "data2020/day11.txt"
-  -- part2 "data2020/test11.txt"
-  part2 "data2020/day11.txt"
+  part1 "data2020/test11.txt"
+  -- part1 "data2020/day11.txt"
+  part2 "data2020/test11.txt"
+  -- part2 "data2020/day11.txt"
   pass
