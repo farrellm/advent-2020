@@ -11,6 +11,12 @@ module Prelude
     mv4,
     mv8,
     juxt,
+    (#!),
+    (#!!),
+    (#!!!),
+    (#!?),
+    (#!!?),
+    (#!!!?),
     printGrid,
   )
 where
@@ -21,6 +27,7 @@ import Data.List (maximum, minimum)
 import Data.Map as X ((!))
 import Data.Set as X (intersection, union)
 import Data.Vector as X (Vector)
+import qualified Data.Vector as V
 import Relude as X hiding (many, some)
 import Relude.Extra.Enum as X
 import Relude.Extra.Foldable1 as X
@@ -55,24 +62,48 @@ unsafeParse p f = do
 md5 :: Text -> Text
 md5 = show . hash @ByteString @MD5 . encodeUtf8
 
-mv4 :: (Enum a) => Dir4 -> (a, a) -> (a, a)
-mv4 N = first pred
-mv4 S = first succ
-mv4 E = second succ
-mv4 W = second pred
+mv4' :: (Enum a) => Dir4 -> (a, a) -> (a, a)
+mv4' N = first pred
+mv4' S = first succ
+mv4' E = second succ
+mv4' W = second pred
 
-mv8 :: Dir8 -> (Int, Int) -> (Int, Int)
-mv8 NN = first pred
-mv8 SS = first succ
-mv8 EE = second succ
-mv8 WW = second pred
-mv8 NE = bimap pred succ
-mv8 SE = bimap succ succ
-mv8 NW = bimap pred pred
-mv8 SW = bimap succ pred
+mv8' :: (Enum a) => Dir8 -> (a, a) -> (a, a)
+mv8' NN = first pred
+mv8' SS = first succ
+mv8' EE = second succ
+mv8' WW = second pred
+mv8' NE = bimap pred succ
+mv8' SE = bimap succ succ
+mv8' NW = bimap pred pred
+mv8' SW = bimap succ pred
+
+mv4 :: (Enum a) => (a, a) -> Dir4 -> (a, a)
+mv4 = flip mv4'
+
+mv8 :: (Enum a) => (a, a) -> Dir8 -> (a, a)
+mv8 = flip mv8'
 
 juxt :: (a -> b) -> (a -> c) -> a -> (b, c)
 juxt f g x = (f x, g x)
+
+(#!) :: Vector a -> Int -> a
+(#!) = (V.!)
+
+(#!!) :: Vector (Vector a) -> (Int, Int) -> a
+v #!! (a, b) = v V.! a V.! b
+
+(#!!!) :: Vector (Vector (Vector a)) -> (Int, Int, Int) -> a
+v #!!! (a, b, c) = v V.! a V.! b V.! c
+
+(#!?) :: Vector a -> Int -> Maybe a
+(#!?) = (V.!?)
+
+(#!!?) :: Vector (Vector a) -> (Int, Int) -> Maybe a
+v #!!? (a, b) = v V.!? a >>= (V.!? b)
+
+(#!!!?) :: Vector (Vector (Vector a)) -> (Int, Int, Int) -> Maybe a
+v #!!!? (a, b, c) = v V.!? a >>= (V.!? b) >>= (V.!? c)
 
 printGrid :: Map (Int, Int) Char -> IO ()
 printGrid m = do
