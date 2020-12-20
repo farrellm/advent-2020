@@ -48,6 +48,7 @@ dependencies:
 - gauge
 - gloss
 - lens
+- linear
 - megaparsec
 - mtl
 - parser-combinators

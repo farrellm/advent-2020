@@ -20,6 +20,8 @@ module Prelude
     (#!!?),
     (#!!!?),
     printGrid,
+    symbol,
+    parens,
   )
 where
 
@@ -39,7 +41,9 @@ import Relude.Extra.Tuple as X
 import Relude.Unsafe as X (read, (!!))
 import Text.Megaparsec (Parsec, errorBundlePretty)
 import qualified Text.Megaparsec as Mp
+import Text.Megaparsec.Char
 import Text.Megaparsec.Char.Lexer as X (binary, decimal, hexadecimal, octal, signed)
+import qualified Text.Megaparsec.Char.Lexer as L
 
 type Parser = Parsec Void Text
 
@@ -131,3 +135,12 @@ printGrid m = do
         Nothing -> putStr "."
         Just x -> putStr [x]
     putStrLn ""
+
+sc :: Parser ()
+sc = void $ Mp.many (char ' ')
+
+symbol :: Text -> Parser Text
+symbol = L.symbol sc
+
+parens :: Parser a -> Parser a
+parens p = symbol "(" *> p <* symbol ")"

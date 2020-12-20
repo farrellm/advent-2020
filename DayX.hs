@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeApplications #-}
 
-module DayX where
+module Advent20XX.DayX where
 
 import qualified Data.Map as M
 import qualified Data.Set as S
